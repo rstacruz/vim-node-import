@@ -30,13 +30,13 @@ Semicolons are added if any other line in your buffer ends in a semicolon.
 
 ## Install
 
-Using [vim-plug]:
+When using [vim-plug], add this to your `~/.vimrc`:
+
+[vim-plug]: https://github.com/junegunn/vim-plug
 
 ```vim
 Plug 'rstacruz/vim-node-import'
 ```
-
-[vim-plug]: https://github.com/junegunn/vim-plug
 
 <br>
 
