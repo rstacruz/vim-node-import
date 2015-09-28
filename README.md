@@ -28,6 +28,26 @@ Semicolons are added if any other line in your buffer ends in a semicolon.
 
 <br>
 
+## Install
+
+Using [vim-plug]:
+
+```vim
+Plug 'rstacruz/vim-node-import'
+```
+
+[vim-plug]: https://github.com/junegunn/vim-plug
+
+<br>
+
+## By the way
+
+This plugin works swimmingly with [vim-closer], which, if you write JavaScript, you should also have.
+
+[vim-closer]: https://github.com/rstacruz/vim-closer
+
+<br>
+
 ## Thanks
 
 **vim-node-import** © 2015+, Rico Sta. Cruz. Released under the [MIT] License.<br>
