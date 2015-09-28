@@ -43,19 +43,19 @@ function! node_import#expand(mode)
   let semi = s:use_semicolon()
   let cmd = ''
 
-  if parts[0] ==# 'i' " import
+  if parts[0] =~ '^i\(m\(p\(o\)\?\)\?\)\?$' " import
     if module[1] !=# ''
       let cmd = 'import { ' . name. " } from '" . module[0] . "'" . semi
     else
       let cmd = 'import ' . name . " from '" . module[0] . "'" . semi
     endif
-  elseif parts[0] ==# 'v' " var
+  elseif parts[0] =~ '^v\(a\)\?$' " var
     if module[1] !=# ''
       let cmd = 'var ' . name . " = require('" . module[0] . "')." . module[1] . semi
     else
       let cmd = 'var ' . name . " = require('" . module[0] . "')" . semi
     endi
-  elseif parts[0] ==# 'r' || parts[0] ==# 'c' " require | const
+  elseif parts[0] =~ '^r\(e\(q\(uire\)\?\)\?\)\?$' || parts[0] ==# '^c\(o\(n\)\?\)\?$' " require | const
     if module[1] !=# ''
       let cmd = 'const ' . name . " = require('" . module[0] . "')." . module[1] . semi
     else
@@ -66,8 +66,7 @@ function! node_import#expand(mode)
   if cmd ==# ''
     return ''
   else
-    return "\<BS>\<C-O>^\"_C" . cmd . "\<CR>"
-    return "\<BS>\<C-O>^\<C-O>C" . cmd . "\<C-O>o"
+    return "\<BS>\<C-O>^\"_C" . cmd . "\<CR>\<Esc>a"
   endif
 endfunction
 
