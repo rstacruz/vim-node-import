@@ -1,7 +1,7 @@
 # vim-node-import
 
 ```js
-require fs⏎
+r fs⏎
 ```
 
 turns into:
@@ -13,17 +13,16 @@ const fs = require('fs')
 also:
 
 ```js
-require path          → const path = require('path')
-require ../setup      → const setup = require('../setup')
-require path.join     → const join = require('path').join
+r path          → const path = require('path')
+r ../setup      → const setup = require('../setup')
+r path.join     → const join = require('path').join
+r React         → const React = require('react')
 
-var path              → var path = require('path')
+v path              → var path = require('path')
 
-import path           → import path from 'path'
-import path.join      → import { join } from 'path'
+i path           → import path from 'path'
+i path.join      → import { join } from 'path'
 ```
-
-Also, *require* can be shortened to `r`, *var* to `v`, and *import* to `i`.
 
 <br>
 

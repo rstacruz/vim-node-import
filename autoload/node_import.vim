@@ -43,19 +43,19 @@ function! node_import#expand(mode)
   let semi = s:use_semicolon()
   let cmd = ''
 
-  if parts[0] ==# 'import' || parts[0] ==# 'i'
+  if parts[0] ==# 'i' " import
     if module[1] !=# ''
       let cmd = 'import { ' . name. " } from '" . module[0] . "'" . semi
     else
       let cmd = 'import ' . name . " from '" . module[0] . "'" . semi
     endif
-  elseif parts[0] ==# 'vrequire' || parts[0] ==# 'v'
+  elseif parts[0] ==# 'v' " var
     if module[1] !=# ''
       let cmd = 'var ' . name . " = require('" . module[0] . "')." . module[1] . semi
     else
       let cmd = 'var ' . name . " = require('" . module[0] . "')" . semi
     endi
-  elseif parts[0] ==# 'require' || parts[0] ==# 'r'
+  elseif parts[0] ==# 'r' || parts[0] ==# 'c' " require | const
     if module[1] !=# ''
       let cmd = 'const ' . name . " = require('" . module[0] . "')." . module[1] . semi
     else
@@ -83,6 +83,9 @@ function! s:to_module(file)
     let extra = substitute(name, '^.*\.', '', 'g')
     let name = substitute(name, '\.[a-zA-Z0-9\-_]*$', '', 'g')
   endif
+
+  " React => react
+  let name = tolower(name)
 
   return [ name, extra ]
 endfunction
