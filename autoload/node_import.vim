@@ -15,6 +15,8 @@ function! node_import#expand(mode)
   let line = getline('.')
   let line = substitute(line, '^\s*', '', 'g')
   let line = substitute(line, '\s*$', '', 'g')
+  if strlen(line) ==# '0' | return '' | endif
+
   let parts = split(line, ' ')
   let module = s:to_module(parts[0])
   let name = s:to_name(parts[0])
