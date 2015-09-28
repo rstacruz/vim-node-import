@@ -4,13 +4,13 @@
 r fs⏎
 ```
 
-turns into:
+Turns into:
 
 ```js
 const fs = require('fs')
 ```
 
-also:
+Also:
 
 ```js
 r path        → const path = require('path')
@@ -23,6 +23,8 @@ v path        → var path = require('path')
 i path        → import path from 'path'
 i path.join   → import { join } from 'path'
 ```
+
+Semicolons are added if any other line in your buffer ends in a semicolon.
 
 <br>
 
