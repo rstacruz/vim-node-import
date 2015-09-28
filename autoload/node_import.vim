@@ -6,35 +6,56 @@ let g:node_import_loaded=1
 " TODO: import { multiple, things }
 " TODO: browser = zombie
 
+if maparg("<Plug>(NodeImportExpand)") == ""
+  inoremap <silent> <SID>NodeImportExpand <C-R>=node_import#expand('var')<CR>
+  imap <script> <Plug>NodeImportExpand <SID>NodeImportExpand
+endif
+
 function! node_import#init()
   inoremap <silent> <C-e> <C-R>=node_import#expand('const')<CR>
   inoremap <silent> <C-i> <C-R>=node_import#expand('import')<CR>
+
+  let b:node_import = 1
+  let oldmap = maparg('<CR>', 'i')
+
+  if oldmap =~# 'NodeImportExpand'
+    " already mapped. maybe the user was playing with `set ft`
+  elseif oldmap != ""
+    exe "imap <CR> ".oldmap."<Plug>NodeImportExpand"
+  else
+    imap  <CR> <CR><Plug>NodeImportExpand
+  endif
 endfunction
 
 function! node_import#expand(mode)
-  let line = getline('.')
+  " supress if it broke off a line (pressed enter not at the end)
+  if match(getline('.'), '^\s*$') == -1 | return '' | endif
+
+  let line = getline(line('.') - 1)
+  echo line
   let line = substitute(line, '^\s*', '', 'g')
   let line = substitute(line, '\s*$', '', 'g')
-  if strlen(line) ==# '0' | return '' | endif
+  if line !~ ' ' | return '' | endif
 
   let parts = split(line, ' ')
-  let module = s:to_module(parts[0])
-  let name = s:to_name(parts[0])
+  let module = s:to_module(parts[1])
+  let name = s:to_name(parts[1])
   let semi = s:use_semicolon()
+  let cmd = ''
 
-  if a:mode ==# 'import'
+  if parts[0] ==# 'import' || parts[0] ==# 'i'
     if module[1] !=# ''
       let cmd = 'import { ' . name. " } from '" . module[0] . "'" . semi
     else
       let cmd = 'import ' . name . " from '" . module[0] . "'" . semi
     endif
-  elseif a:mode ==# 'var'
+  elseif parts[0] ==# 'vrequire' || parts[0] ==# 'v'
     if module[1] !=# ''
       let cmd = 'var ' . name . " = require('" . module[0] . "')." . module[1] . semi
     else
       let cmd = 'var ' . name . " = require('" . module[0] . "')" . semi
     endi
-  else
+  elseif parts[0] ==# 'require' || parts[0] ==# 'r'
     if module[1] !=# ''
       let cmd = 'const ' . name . " = require('" . module[0] . "')." . module[1] . semi
     else
@@ -42,8 +63,12 @@ function! node_import#expand(mode)
     endif
   endif
 
-  normal ^C
-  return '' . cmd . "\n"
+  if cmd ==# ''
+    return ''
+  else
+    return "\<BS>\<C-O>^\"_C" . cmd . "\<CR>"
+    return "\<BS>\<C-O>^\<C-O>C" . cmd . "\<C-O>o"
+  endif
 endfunction
 
 function! s:to_module(file)
