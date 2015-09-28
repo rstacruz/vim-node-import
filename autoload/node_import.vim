@@ -7,8 +7,8 @@ let g:node_import_loaded=1
 " TODO: browser = zombie
 
 if maparg("<Plug>(NodeImportExpand)") == ""
-  inoremap <silent> <SID>NodeImportExpand <C-R>=node_import#expand('var')<CR>
-  imap <script> <Plug>NodeImportExpand <SID>NodeImportExpand
+  inoremap <silent> <SID>(NodeImportExpand) <C-R>=node_import#expand('var')<CR>
+  imap <script> <Plug>(NodeImportExpand) <SID>(NodeImportExpand)
 endif
 
 function! node_import#init()
@@ -21,9 +21,9 @@ function! node_import#init()
   if oldmap =~# 'NodeImportExpand'
     " already mapped. maybe the user was playing with `set ft`
   elseif oldmap != ""
-    exe "imap <CR> ".oldmap."<Plug>NodeImportExpand"
+    exe "imap <CR> ".oldmap."<Plug>(NodeImportExpand)"
   else
-    imap  <CR> <CR><Plug>NodeImportExpand
+    imap  <CR> <CR><Plug>(NodeImportExpand)
   endif
 endfunction
 
