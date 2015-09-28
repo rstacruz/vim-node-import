@@ -13,15 +13,15 @@ const fs = require('fs')
 also:
 
 ```js
-r path          → const path = require('path')
-r ../setup      → const setup = require('../setup')
-r path.join     → const join = require('path').join
-r React         → const React = require('react')
+r path        → const path = require('path')
+r ../setup    → const setup = require('../setup')
+r path.join   → const join = require('path').join
+r React       → const React = require('react')
 
-v path              → var path = require('path')
+v path        → var path = require('path')
 
-i path           → import path from 'path'
-i path.join      → import { join } from 'path'
+i path        → import path from 'path'
+i path.join   → import { join } from 'path'
 ```
 
 <br>
