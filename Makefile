@@ -4,13 +4,14 @@ test: vendor/vimrc
 	@env HOME="$(shell pwd)/vendor" ${vim} -Nu $< "+Vader! test/*" && echo OK
 
 vim: vendor/vimrc
-	@env HOME="$(shell pwd)/vendor" ${vim} -Nu $<
+	@env HOME="$(shell pwd)/vendor" ${vim} -Nu $< file.js
 
 vendor/vimrc: vendor/vader.vim
 	@mkdir -p ./vendor
 	@echo "filetype off" > $@
 	@echo "set rtp+=vendor/vader.vim" >> $@
 	@echo "set rtp+=." >> $@
+	@echo "set backspace=indent,eol,start" >> $@
 	@echo "filetype plugin indent on" >> $@
 	@echo "syntax enable" >> $@
 

@@ -12,6 +12,9 @@ if maparg("<Plug>(NodeImportExpand)") == ""
 endif
 
 function! node_import#init()
+  " not sure why people don't turn this on
+  set backspace+=start
+
   inoremap <silent> <C-e> <C-R>=node_import#expand('const')<CR>
   inoremap <silent> <C-i> <C-R>=node_import#expand('import')<CR>
 
