@@ -1,0 +1,55 @@
+Given javascript (js):
+  r path
+Do (pressing enter):
+  GA\<Enter>|
+Expect (expands 'r path'):
+  const path = require('path')
+  |
+
+Given javascript (js):
+  i React
+Do (pressing enter):
+  GA\<Enter>|
+Expect (handles 'i React'):
+  import React from 'react'
+  |
+
+Given javascript (js):
+  i React.createClass
+Do (pressing enter):
+  GA\<Enter>|
+Expect (handles 'i React'):
+  import { createClass } from 'react'
+  |
+
+Given javascript (js):
+  v React
+Do (pressing enter):
+  GA\<Enter>|
+Expect (handles 'i React'):
+  var React = require('react')
+  |
+
+Given javascript (js):
+  r React
+Do (pressing enter):
+  GA\<Enter>|
+Expect (handles camelcase):
+  const React = require('react')
+  |
+
+Given javascript (js):
+  r ../setup
+Do (pressing enter):
+  GA\<Enter>|
+Expect (expands 'r ../path'):
+  const setup = require('../setup')
+  |
+
+Given javascript (js):
+  r path.join
+Do (pressing enter):
+  GA\<Enter>|
+Expect (expands 'r path.join'):
+  const join = require('path').join
+  |

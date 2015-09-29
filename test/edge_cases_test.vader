@@ -1,0 +1,49 @@
+Given javascript (js):
+  i path
+Do (pressing enter):
+  GA\<Enter>|
+Expect (expands 'i path'):
+  import path from 'path'
+  |
+
+Given javascript (js):
+  a
+  i path
+Do (pressing enter):
+  GA\<Enter>|
+Expect (leaves lines above alone):
+  a
+  import path from 'path'
+  |
+
+Given javascript (js):
+  a
+  i path
+  b
+Do (pressing enter):
+  jA\<Enter>|
+Expect (expands in the middle of a line):
+  a
+  import path from 'path'
+  |
+  b
+
+Given javascript (js):
+  var x;
+  i path
+Do (pressing enter):
+  GA\<Enter>|
+Expect (expands 'i path' with semicolons):
+  var x;
+  import path from 'path';
+  |
+
+Given javascript (js):
+  var x;
+  i path
+Do (pressing enter):
+  G0llla\<Enter>|
+Expect (handles being pressed in the middle of a line):
+  var x;
+  i pa
+  |th

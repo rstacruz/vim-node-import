@@ -26,6 +26,8 @@ i path.join   → import { join } from 'path'
 
 Semicolons are added if any other line in your buffer ends in a semicolon.
 
+[![Status](https://travis-ci.org/rstacruz/vim-node-import.svg?branch=master)](https://travis-ci.org/rstacruz/vim-node-import "See test builds")
+
 <br>
 
 ## Install
